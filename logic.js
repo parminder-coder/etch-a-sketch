@@ -1,6 +1,10 @@
 const numberBtn=document.getElementById("blockNo");
 let number=16;
 
+function color(){
+    return(Math.floor(Math.random()* (255-0+1))+0)
+}
+
 
 numberBtn.onclick=function(){
     number=prompt("enter the number of blocks on one side");
@@ -14,10 +18,10 @@ function grid(n){
 
     container.innerHTML="";
 
-    const width=container.offsetWidth-2;
+    const width=container.offsetWidth-2; //width and height came with border added
     const height=container.offsetHeight-2;
 
-    n=Number(n);
+    n=Number(n); //n was a string
 
 
     console.log(`height is ${height/Number(n)} and width is ${width/Number(n)}`)
@@ -28,13 +32,19 @@ function grid(n){
         for(let j=0; j<n; j++){
             const block=document.createElement("div");
             block.className="block";
-            block.style.width = width / n -2+ "px";
+            block.style.width = width / n -2+ "px"; //-2 to adjust the border added afterwards
             block.style.height = height / n -2+ "px";
-            block.style.border="1px solid black";
+            block.style.border="1px solid black";            
 
             container.appendChild(block);
 
+            block.addEventListener("mouseover",()=>{
+                block.style.backgroundColor=`rgb(${color()},${color()},${color()})`;            
+            })
+
         }
+
+        
         console.log("one row added")
 
     }
